@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriFlow AI | Authentication</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css"> <!-- Import core theme -->
+    <link rel="stylesheet" href="auth.css">   <!-- Auth specific styles -->
+</head>
+<body class="auth-body">
+    
+    <div class="auth-container">
+        
+        <div class="brand">
+            <span class="emoji">🥗</span>
+            <h1>NutriFlow AI</h1>
+            <p>Your context-aware nutrition & habit architect.</p>
+        </div>
+
+        <!-- Auth Module (Holds both forms) -->
+        <div class="auth-module" id="authModule">
+            
+            <!-- Login Form -->
+            <form class="auth-form login-form" id="loginForm" onsubmit="event.preventDefault(); simulateAuth('login');">
+                <h2>Welcome Back</h2>
+                <p>Enter your details to access your dashboard.</p>
+                
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="shivani@example.com" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+                
+                <div class="form-actions">
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn-primary auth-btn" id="loginSubmitBtn">Sign In</button>
+                
+                <p class="switch-prompt">
+                    Don't have an account? <span class="switch-link" id="showSignup">Sign Up</span>
+                </p>
+            </form>
+
+            <!-- Signup Form -->
+            <form class="auth-form signup-form" id="signupForm" onsubmit="event.preventDefault(); simulateAuth('signup');">
+                <h2>Create Account</h2>
+                <p>Join the frictionless nutrition revolution.</p>
+                
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signupName" placeholder="Shivani Choudhary" required>
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="signupEmail" placeholder="shivani@example.com" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-primary auth-btn" id="signupSubmitBtn">Create Account</button>
+                
+                <p class="switch-prompt">
+                    Already have an account? <span class="switch-link" id="showLogin">Sign In</span>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Animated background decorators -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <script src="db.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

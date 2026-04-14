@@ -1,0 +1,301 @@
+/* --- NutriFlow Extended Features Styles --- */
+
+/* Utility Classes */
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gap-2 {
+    gap: 8px;
+}
+
+.gap-4 {
+    gap: 16px;
+}
+
+.gap-6 {
+    gap: 24px;
+}
+
+.mb-4 {
+    margin-bottom: 16px;
+}
+
+.mb-6 {
+    margin-bottom: 24px;
+}
+
+.text-sec {
+    color: var(--text-secondary);
+}
+
+/* Common Grid Layouts used in new views */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+}
+
+/* Day Cards (Meal Planner) */
+.timeline {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.day-card {
+    min-width: 160px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.day-card.active {
+    background: var(--primary-glow);
+    border-color: var(--primary);
+}
+
+.meal-chip {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    border-left: 3px solid;
+}
+
+.meal-chip.b {
+    border-color: #f59e0b;
+}
+
+.meal-chip.l {
+    border-color: #10b981;
+}
+
+.meal-chip.d {
+    border-color: #3b82f6;
+}
+
+/* List Items (Shopping List, Leaderboard) */
+.list-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.list-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    padding: 16px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.list-item.leader {
+    background: linear-gradient(to right, rgba(245, 158, 11, 0.1), transparent);
+    border-left: 3px solid var(--warning);
+}
+
+.rank {
+    font-size: 18px;
+    font-weight: 700;
+    width: 30px;
+    color: var(--text-secondary);
+}
+
+.leader .rank {
+    color: var(--warning);
+}
+
+/* Switches (Settings) */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #334155;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: var(--primary);
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+/* Avatar / Profile */
+.avatar-lg {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid var(--glass-border);
+}
+
+.xp-bar-container {
+    background: #334155;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.xp-bar {
+    background: var(--success);
+    height: 100%;
+    width: 65%;
+    box-shadow: 0 0 10px var(--success);
+}
+
+/* Debt Tracker Progress Bars */
+.debt-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.debt-label {
+    width: 80px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.debt-track {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.debt-fill {
+    height: 100%;
+    transition: width 1s;
+}
+
+.debt-item.good .debt-fill {
+    background: var(--success);
+    width: 85%;
+}
+
+.debt-item.warn .debt-fill {
+    background: var(--warning);
+    width: 45%;
+}
+
+.debt-item.crit .debt-fill {
+    background: var(--danger);
+    width: 15%;
+}
+
+/* --- Toast Notification System --- */
+#toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.toast {
+    background: var(--bg-surface-elevated);
+    color: white;
+    padding: 14px 20px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 4px solid var(--primary);
+    transform: translateX(120%);
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast.success {
+    border-color: var(--success);
+}
+
+.toast.error {
+    border-color: var(--danger);
+}
+
+.toast-icon {
+    font-size: 20px;
+}
+
+/* Modal Form Inputs override for consistency */
+.modal-body input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-main);
+    outline: none;
+    margin-bottom: 20px;
+}
+
+.modal-body input:focus {
+    border-color: var(--primary);
+}
+
+.modal-body label {
+    display: block;
+    text-align: left;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    font-weight: 500;
+}

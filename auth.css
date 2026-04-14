@@ -1,0 +1,164 @@
+/* Auth specific styles building on top of index.css */
+
+.auth-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-base);
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background Blobs for a premium aesthetic */
+.blob {
+    position: absolute;
+    filter: blur(100px);
+    z-index: 0;
+    opacity: 0.5;
+    animation: drift 10s infinite alternate ease-in-out;
+}
+.blob-1 {
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: var(--primary);
+    border-radius: 50%;
+}
+.blob-2 {
+    bottom: -150px; left: -100px;
+    width: 500px; height: 500px;
+    background: var(--secondary);
+    border-radius: 50%;
+    animation-direction: alternate-reverse;
+}
+
+@keyframes drift {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(50px) scale(1.1); }
+}
+
+/* Main Container */
+.auth-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.brand {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.brand .emoji { font-size: 32px; margin-bottom: 8px; display: inline-block; }
+.brand h1 { 
+    font-size: 28px; 
+    background: linear-gradient(to right, #fff, #94a3b8);
+    -webkit-background-clip: text; color: transparent;
+    margin-bottom: 8px;
+}
+.brand p { color: var(--text-secondary); font-size: 15px;}
+
+/* Auth Module Card */
+.auth-module {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    min-height: 450px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transition: height 0.4s ease;
+}
+
+.auth-form {
+    position: absolute;
+    top: 0; left: 0; width: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.auth-form h2 { font-size: 24px; margin-bottom: 8px; }
+.auth-form p { color: var(--text-secondary); font-size: 14px; margin-bottom: 24px; }
+
+/* Form Field Styling */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+.input-group label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+.input-group input {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-main);
+    font-size: 15px;
+    transition: all 0.2s;
+    outline: none;
+}
+.input-group input:focus {
+    border-color: var(--primary);
+    background: rgba(14, 165, 233, 0.05);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 24px;
+}
+.forgot-link { font-size: 13px; color: var(--primary); font-weight: 500; }
+.forgot-link:hover { text-decoration: underline; }
+
+.auth-btn { width: 100%; justify-content: center; padding: 14px; font-size: 16px; margin-top: 8px; }
+
+.switch-prompt {
+    text-align: center;
+    margin-top: 24px !important;
+    margin-bottom: 0 !important;
+}
+.switch-link {
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+}
+.switch-link:hover { text-decoration: underline; }
+
+/* Logic for Toggling Forms */
+.auth-module.show-login .login-form {
+    transform: translateX(0); opacity: 1; pointer-events: auto;
+}
+.auth-module.show-login .signup-form {
+    transform: translateX(100%); opacity: 0; pointer-events: none;
+}
+
+.auth-module.show-signup .login-form {
+    transform: translateX(-100%); opacity: 0; pointer-events: none;
+}
+.auth-module.show-signup .signup-form {
+    transform: translateX(0); opacity: 1; pointer-events: auto;
+}
+
+/* Loading Spinner for Buttons */
+.spinner {
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    width: 20px; height: 20px;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriFlow AI | Context-Aware Nutrition</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="features.css">
+</head>
+
+<body class="dark-theme">
+
+    <nav class="topbar-nav">
+        <div class="logo">
+            <span class="emoji">🥗</span>
+            <h1>NutriFlow</h1>
+        </div>
+
+        <ul class="nav-links">
+            <li class="active" id="nav-dashboard-li"><a href="#" id="nav-dashboard">Dashboard</a></li>
+            <li id="nav-meal-li"><a href="#" id="nav-meal-plan">Meal Planner</a></li>
+            <li id="nav-groups-li"><a href="#" id="nav-groups">Groups & Squads</a></li>
+            <li id="nav-profile-li"><a href="#" id="nav-profile">Profile</a></li>
+            <li id="nav-settings-li"><a href="#" id="nav-settings">Settings</a></li>
+        </ul>
+
+        <div style="display: flex; gap: 16px; align-items: center;">
+
+            <button class="btn-secondary" id="logoutBtn"
+                style="color: var(--danger); border-color: rgba(239, 68, 68, 0.3);">🚪 Log Out</button>
+        </div>
+    </nav>
+
+    <main class="dashboard" id="view-dashboard">
+        <header class="topbar">
+            <div>
+                <h2 id="uiGreetingName">Hello, 👋</h2>
+                <p>Tuesday, April 14 • Your Circadian Window is open</p>
+            </div>
+            <div class="actions">
+                <button class="btn-primary" id="magicLogBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z">
+                        </path>
+                        <circle cx="12" cy="13" r="3"></circle>
+                    </svg>
+                    Magic Log
+                </button>
+                <div class="avatar"></div>
+            </div>
+        </header>
+
+        <section class="bento-grid">
+
+            <!-- NDS Score -->
+            <div class="bento-card bento-nds">
+                <h3>Nutritional Density Score</h3>
+                <div class="nds-wrapper">
+                    <svg class="radial-progress" viewBox="0 0 120 120">
+                        <circle class="bg" cx="60" cy="60" r="50" />
+                        <circle class="progress" cx="60" cy="60" r="50" id="ndsProgress" />
+                    </svg>
+                    <div class="nds-value">
+                        <span id="ndsScore">0</span>
+                        <sub>/100</sub>
+                    </div>
+                </div>
+                <p class="status trending-up">↑ 12% from last week</p>
+            </div>
+
+            <!-- Macro Donut -->
+            <div class="bento-card bento-macros">
+                <h3>Daily Macros</h3>
+                <div class="macro-chart">
+                    <div class="donut-chart">
+                        <div class="macro-center">
+                            <span class="cal-count">1,240</span>
+                            <span class="cal-label">kcal eaten</span>
+                        </div>
+                    </div>
+                    <ul class="macro-legend">
+                        <li class="macro-item pro">
+                            <span>Protein</span>
+                            <strong>85g</strong>
+                        </li>
+                        <li class="macro-item fat">
+                            <span>Fat</span>
+                            <strong>45g</strong>
+                        </li>
+                        <li class="macro-item carb">
+                            <span>Carbs</span>
+                            <strong>120g</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Hydration Ring -->
+            <div class="bento-card bento-hydration">
+                <h3>Hydration</h3>
+                <div class="hydration-visual">
+                    <div class="water-glass">
+                        <div class="water-level" id="waterLevel"></div>
+                    </div>
+                    <div class="hydration-stats">
+                        <h2>1.8L</h2>
+                        <p>of 2.5L goal</p>
+                        <button class="btn-secondary" id="addWaterBtn">+ 250ml</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Streak -->
+            <div class="bento-card bento-streak">
+                <h3>Current Streak</h3>
+                <div class="streak-visual">
+                    <div class="flame-icon">🔥</div>
+                    <div class="streak-days">
+                        <h2>14 Days</h2>
+                        <p>Protein Goal Hit</p>
+                    </div>
+                </div>
+                <div class="streak-badges">
+                    <span class="badge achieved">1w</span>
+                    <span class="badge achieved">2w</span>
+                    <span class="badge locked">1m</span>
+                </div>
+            </div>
+
+            <!-- Next Meal Suggestion -->
+            <div class="bento-card bento-suggestion">
+                <div class="suggestion-header">
+                    <h3>AI Smart Suggestion</h3>
+                    <span class="badge tag">Lunch Window</span>
+                </div>
+                <div class="suggestion-content">
+                    <div class="meal-image">
+                        <p>🥗</p>
+                    </div>
+                    <div class="meal-info">
+                        <h4>Mediterranean Quinoa Bowl</h4>
+                        <p>Perfect for your post-workout recovery. High in Omega-3 to match your cognitive fuel goal.
+                        </p>
+                        <div class="meal-meta">
+                            <span>⏱ 15 min prep</span>
+                            <span>🔥 420 kcal</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- End of Bento Grid Section -->
+
+    </main>
+
+    <main class="dashboard" id="view-meal-plan" style="display: none;">
+        <header class="topbar">
+            <div>
+                <h2>Meal Planner</h2>
+                <p>Your AI-generated weekly fueling strategy</p>
+            </div>
+            <div class="actions">
+                <button class="btn-secondary">🛒 Smart Shopping List</button>
+                <button class="btn-primary">Generate New Plan</button>
+            </div>
+        </header>
+
+        <div class="bento-card mb-6">
+            <h3 class="mb-4">This Week's Horizon</h3>
+            <div class="timeline">
+                <div class="day-card active">
+                    <h4>Today</h4>
+                    <div class="meal-chip b">B: Green Smoothie</div>
+                    <div class="meal-chip l">L: Quinoa Bowl</div>
+                    <div class="meal-chip d">D: Grilled Salmon</div>
+                </div>
+                <div class="day-card">
+                    <h4>Tomorrow</h4>
+                    <div class="meal-chip b">B: Protein Oats</div>
+                    <div class="meal-chip l">L: Turkey Wrap</div>
+                    <div class="meal-chip d">D: Lentil Soup</div>
+                </div>
+                <div class="day-card">
+                    <h4>Thursday</h4>
+                    <div class="meal-chip b">B: Avocado Toast</div>
+                    <div class="meal-chip l">L: Chicken Salad</div>
+                    <div class="meal-chip d">D: Tofu Stir-Fry</div>
+                </div>
+                <!-- Additional days omitted for brevity -->
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="bento-card">
+                <h3 class="flex-between">Pantry Scanner <span class="badge tag">Beta</span></h3>
+                <p class="text-sec mb-4">Scan existing ingredients so we generate meals utilizing them to minimize
+                    waste.</p>
+                <div class="flex-between">
+                    <span>34 items logged</span>
+                    <button class="btn-secondary small">📸 Scan Pantry</button>
+                </div>
+            </div>
+            <div class="bento-card">
+                <h3>Budget Constraints</h3>
+                <p class="text-sec mb-4">You have set a weekly food budget of ₹2,500. Current plan is projected to cost:
+                    <strong>₹2,140</strong>.
+                </p>
+                <div class="xp-bar-container">
+                    <div class="xp-bar" style="width: 85%;"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main class="dashboard" id="view-groups" style="display: none;">
+        <header class="topbar">
+            <div>
+                <h2>Groups & Squads</h2>
+                <p>Compete, conquer, and stay accountable</p>
+            </div>
+            <div class="actions">
+                <button class="btn-primary">Create Squad +</button>
+            </div>
+        </header>
+
+        <div class="grid-2">
+            <div class="bento-card">
+                <h3 class="mb-4">🔥 My Squads Leaderboard</h3>
+                <div class="list-group" id="uiSquadList">
+                    <!-- Dynamic DB injection site -->
+                </div>
+            </div>
+
+            <div class="list-group">
+                <div class="bento-card"
+                    style="background: linear-gradient(145deg, rgba(16, 185, 129, 0.1), transparent);">
+                    <h3>🌿 Diet Hack Quest</h3>
+                    <p class="text-sec mb-4">Squad Challenge: Log 3 servings of fermented foods this week.</p>
+                    <button class="btn-secondary small">Submit Evidence</button>
+                </div>
+                <div class="bento-card">
+                    <h3>Recent Squad Activity</h3>
+                    <div class="list-group" style="gap: 8px; margin-top: 12px;">
+                        <p style="font-size: 13px;"><strong style="color:var(--primary);">@alexfitness</strong> logged a
+                            92-NDS Salmon Salad!</p>
+                        <p style="font-size: 13px;"><strong style="color:var(--primary);">@marathon_mike</strong> just
+                            completed a 10K run.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main class="dashboard" id="view-profile" style="display: none;">
+        <header class="topbar">
+            <div>
+                <h2>Profile & Health Data</h2>
+                <p>Your long-term performance matrix</p>
+            </div>
+        </header>
+
+        <div class="grid-2">
+            <div class="bento-card"
+                style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div class="avatar-lg mb-4" style="background: url(https://i.pravatar.cc/150?img=47) center/cover;">
+                </div>
+                <h2 id="uiProfileName">Shivani C.</h2>
+                <p class="text-sec mb-4" id="uiProfileTitle">Level 14 Gut Master 🌿</p>
+                <div style="width: 100%;">
+                    <div class="flex-between" style="font-size:12px;"><span>Next Level</span><span>650 / 1000 XP</span>
+                    </div>
+                    <div class="xp-bar-container">
+                        <div class="xp-bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-card">
+                <h3 class="mb-4">Nutritional Debt Dashboard</h3>
+                <p class="text-sec mb-4" style="font-size: 13px;">Cumulative tracked markers based on logs over 30 days.
+                </p>
+                <div class="debt-item good">
+                    <span class="debt-label">Protein</span>
+                    <div class="debt-track">
+                        <div class="debt-fill"></div>
+                    </div>
+                </div>
+                <div class="debt-item good">
+                    <span class="debt-label">Fiber</span>
+                    <div class="debt-track">
+                        <div class="debt-fill"></div>
+                    </div>
+                </div>
+                <div class="debt-item warn">
+                    <span class="debt-label">Magnesium</span>
+                    <div class="debt-track">
+                        <div class="debt-fill"></div>
+                    </div>
+                </div>
+                <div class="debt-item crit">
+                    <span class="debt-label">Vitamin D</span>
+                    <div class="debt-track">
+                        <div class="debt-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-card" style="grid-column: span 2;">
+                <h3 class="mb-4">Account Management</h3>
+                <div class="flex-between">
+                    <div style="display:flex; gap:16px;">
+                        <button class="btn-secondary" id="editProfileBtn">✏️ Edit Profile</button>
+                        <button class="btn-secondary" id="profileLogoutBtn">🚪 Log Out</button>
+                    </div>
+                    <button class="btn-secondary" id="deleteAccountBtn"
+                        style="color: var(--danger); border-color: rgba(239, 68, 68, 0.3);">🗑 Delete Account</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main class="dashboard" id="view-settings" style="display: none;">
+        <header class="topbar">
+            <div>
+                <h2>Settings</h2>
+                <p>Configuration and AI Adjustments</p>
+            </div>
+            <div class="actions"><button class="btn-primary small">Save Changes</button></div>
+        </header>
+
+        <div class="grid-2">
+            <div class="bento-card">
+                <h3 class="mb-4">AI Features (Opt-In)</h3>
+
+                <div class="list-item mb-4" style="border:none; padding:0;">
+                    <div>
+                        <h4 style="margin-bottom:4px;">Emotion-Eating Camera Scanning</h4>
+                        <p class="text-sec" style="font-size: 12px;">Uses facial expressions before meal logging to
+                            detect mood.</p>
+                    </div>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+
+                <div class="list-item" style="border:none; padding:0;">
+                    <div>
+                        <h4 style="margin-bottom:4px;">Continuous Photo Journal</h4>
+                        <p class="text-sec" style="font-size: 12px;">Background detection of eating via wearable
+                            context.</p>
+                    </div>
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                </div>
+            </div>
+
+            <div class="bento-card">
+                <h3 class="mb-4">Connected Biometrics</h3>
+
+                <div class="list-item mb-4">
+                    <div class="flex-between gap-4">
+                        <span style="font-size:24px;">🍎</span>
+                        <div><strong>Apple HealthKit</strong></div>
+                    </div>
+                    <span style="color: var(--success); font-size: 12px; font-weight:600;">Connected</span>
+                </div>
+                <div class="list-item">
+                    <div class="flex-between gap-4">
+                        <span style="font-size:24px;">🩸</span>
+                        <div><strong>Dexcom G6 / G7</strong></div>
+                    </div>
+                    <button class="btn-secondary small">Connect</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="magicalModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>🎙 Magic Log</h3>
+                <button class="close-btn" onclick="closeAllModals()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="listening-wave">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <p>Say what you ate or upload a photo...</p>
+                <div class="modal-actions">
+                    <button class="btn-primary interactive-btn" data-action="snap">📸 Snap a Plate</button>
+                    <button class="btn-secondary interactive-btn" data-action="barcode">🏷 Scan Barcode</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Squad Modal -->
+    <div class="modal-overlay" id="squadModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>🎮 Create a Squad</h3>
+                <button class="close-btn" onclick="closeAllModals()">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="text-align:left; margin-bottom:20px;">Gather your friends and start competing for better
+                    nutritional density!</p>
+                <label>Squad Name</label>
+                <input type="text" placeholder="e.g. Iron Lifter's Club">
+                <label>Initial Challenge</label>
+                <input type="text" placeholder="e.g. 7 Days No Sugar">
+                <button class="btn-primary" style="width:100%; margin-top:8px;" id="confirmCreateSquadBtn">Create
+                    Squad</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Account Modal -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal" style="border-color: rgba(239, 68, 68, 0.5);">
+            <div class="modal-header">
+                <h3 style="color: var(--danger);">⚠️ Delete Account</h3>
+                <button class="close-btn" onclick="closeAllModals()">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="text-align:left; color:var(--text-secondary);">This action will permanently delete your
+                    identity, connected wearables, and all nutritional log history. This cannot be undone.</p>
+                <div style="display:flex; gap:16px; margin-top:24px;">
+                    <button class="btn-secondary" style="flex:1;" onclick="closeAllModals()">Cancel</button>
+                    <button class="btn-primary"
+                        style="flex:1; background: var(--danger); box-shadow: 0 4px 20px rgba(239,68,68,0.4);"
+                        id="confirmDeleteBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal-overlay" id="editProfileModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>✏️ Edit Profile</h3>
+                <button class="close-btn" onclick="closeAllModals()">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="editProfileForm" onsubmit="event.preventDefault();">
+                    <label>Full Name</label>
+                    <input type="text" id="inputProfileName" required>
+                    <label>Email Address</label>
+                    <input type="email" id="inputProfileEmail" required>
+                    <button class="btn-primary" style="width:100%; margin-top:8px;" id="saveProfileBtn">Save
+                        Profile</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping List Modal -->
+    <div class="modal-overlay" id="shoppingModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>🛒 Smart Shopping List</h3>
+                <button class="close-btn" onclick="closeAllModals()">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="text-align:left; color:var(--text-secondary); margin-bottom:16px;">Based on your generated
+                    healthy weekly plan.</p>
+                <div class="list-group" id="uiShoppingList"
+                    style="text-align:left; max-height:200px; overflow-y:auto; margin-bottom:20px;">
+                    <!-- DB injected shopping items -->
+                </div>
+                <div style="display:flex; gap:16px;">
+                    <button class="btn-primary interactive-btn" style="flex:1;">Send to Instacart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <script src="db.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
